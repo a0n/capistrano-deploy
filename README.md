@@ -9,7 +9,7 @@ Quickstart with Git and Rails
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'capistrano-deploy', :group => :development, :require => false
+gem 'modo-deploy', :group => :development, :require => false
 ```
 
 Create a file named `Capfile` in your project root directory:

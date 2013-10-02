@@ -1,7 +1,7 @@
-require 'capistrano-deploy'
+require 'modo-deploy'
 require 'capistrano/cli'
 
-module CapistranoDeploy
+module ModoDeploy
   module Spec
     module ConfigurationExtension
       def run(cmd, options={}, &block)
@@ -26,8 +26,8 @@ module CapistranoDeploy
       def mock_config(new_instance = false, &block)
         if !@config || new_instance
           @config = Capistrano::Configuration.new(:output => StringIO.new)
-          @config.extend(CapistranoDeploy::Spec::ConfigurationExtension)
-          CapistranoDeploy.load_into(@config)
+          @config.extend(ModoDeploy::Spec::ConfigurationExtension)
+          ModoDeploy.load_into(@config)
         end
 
         @config.instance_eval(&block)
@@ -97,6 +97,6 @@ module CapistranoDeploy
 end
 
 RSpec.configure do |config|
-  config.include CapistranoDeploy::Spec::Helper
-  config.include CapistranoDeploy::Spec::Matchers
+  config.include ModoDeploy::Spec::Helper
+  config.include ModoDeploy::Spec::Matchers
 end

@@ -1,6 +1,6 @@
 require 'capistrano'
 
-module CapistranoDeploy
+module ModoDeploy
   def self.load_into(configuration)
     configuration.load do
       @used_recipes = []
@@ -13,9 +13,9 @@ module CapistranoDeploy
         return if @used_recipes.include?(recipe_name.to_sym)
 
         begin
-          require "capistrano-deploy/#{recipe_name}"
+          require "modo-deploy/#{recipe_name}"
 
-          recipe = CapistranoDeploy.const_get(recipe_name.to_s.capitalize.gsub(/_(\w)/) { $1.upcase })
+          recipe = ModoDeploy.const_get(recipe_name.to_s.capitalize.gsub(/_(\w)/) { $1.upcase })
           recipe.load_into(self)
           @used_recipes << recipe.to_s.split('::').last.downcase.to_sym
         rescue LoadError
@@ -53,5 +53,5 @@ module CapistranoDeploy
 end
 
 if Capistrano::Configuration.instance
-  CapistranoDeploy.load_into(Capistrano::Configuration.instance)
+  ModoDeploy.load_into(Capistrano::Configuration.instance)
 end

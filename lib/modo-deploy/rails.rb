@@ -1,4 +1,4 @@
-module CapistranoDeploy
+module ModoDeploy
   module Rails
     def self.load_into(configuration)
       configuration.load do

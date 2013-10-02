@@ -1,4 +1,4 @@
-module CapistranoDeploy
+module ModoDeploy
   module Unicorn
     def self.load_into(configuration)
       configuration.load do
