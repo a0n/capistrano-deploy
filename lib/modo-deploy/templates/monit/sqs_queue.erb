@@ -1,0 +1,3 @@
+check process <%= application %>_sqs_queue with pidfile <%= shared_path %>/log/sqs_queue.rb.pid
+  start program = "/etc/init.d/daemons_<%= application %> start"
+  stop program = "/etc/init.d/daemons_<%= application %> stop"

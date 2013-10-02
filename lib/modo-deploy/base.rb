@@ -14,3 +14,14 @@ end
 #     #run "#{sudo} apt-get -y install python-software-properties"
 #   end
 # end
+
+
+# module ModoDeploy
+#   module Base
+#     def self.load_into(configuration)
+#       configuration.load do
+#         set :application, Rails.application.class.parent_name.downcase
+#       end
+#     end
+#   end
+# end

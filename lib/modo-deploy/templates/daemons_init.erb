@@ -1,0 +1,49 @@
+#! /bin/sh
+ 
+### BEGIN INIT INFO
+# Provides:          delayed_job
+# Required-Start:    $all
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:
+### END INIT INFO
+ 
+N=/etc/init.d/daemons_<%= application %>
+ruby=<%= rvm_ruby_string %>
+app_root=<%= current_path %>
+user=<%= user %>
+service="daemons_<%= application%>"
+ 
+set -e
+ 
+usage() {
+  echo "Usage: $N {start|stop|status|restart|force-reload} <environment>" >&2
+  exit 1
+}
+ 
+set -e
+ 
+#[ -n "$2" ] || usage
+ 
+#rails_env="$2"
+rails_env=<%= rails_env %>
+ 
+interact() {
+    op="$1"
+    echo "$1ing $service"
+    su - -c "cd $app_root && /usr/bin/env RAILS_ENV=$rails_env rvm $ruby exec bundle exec ./lib/daemons/daemons $op" $user
+}
+ 
+case "$1" in
+    start|stop|status)
+        interact "$1"
+        ;;
+    reload|restart|force-reload)
+        interact restart
+        ;;
+    *)
+        usage
+        ;;
+esac
+ 
+exit 0
